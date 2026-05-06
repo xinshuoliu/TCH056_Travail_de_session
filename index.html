@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page principale</title>
+    <style>
+        .evenement {
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Agenda culturel local</h1>
+    </header>
+
+    <nav style="display: flex; flex-direction: column; gap: 10px;">
+    <label for ="choix-categories"> Choisissez une categorie&nbsp;</label>
+    <select name ="categories" id="choix-categories">
+        <option value="">--Veuillez choisir une option--</option>
+        <option value="Concerts">concert</option>
+        <option value="activities">activities</option>
+        <option value="arts">art</option>
+        <option value="sports">sports</option>
+    </select>
+
+    <label for ="choix-ville"> Choisissez une ville&nbsp;</label>
+    <select name ="ville" id="choix-ville">
+        <option value="">--Veuillez choisir une option--</option>
+        <option value="Montreal">Montreal</option>
+        <option value="Toronto">Toronto</option>
+        <option value="New York">NewYork</option>
+        <option value="Vancouver">Vancouver</option>
+    </select>
+
+    <label for ="choix-public"> Choisissez un public&nbsp;</label>
+    <select name ="public" id="choix-public">
+        <option value="">--Veuillez choisir une option--</option>
+        <option value="Tous">tous</option>
+        <option value="Familles">fam</option>
+        <option value="adultes">adultes</option>
+        <option value="adolescents">ado</option>
+    </select>
+    </nav>
+
+    <div>
+        <article class="evenement">
+            <h2>Concert Jean-Drapeau</h2>
+            <time datetime="2026-05-15">May 15th</time>
+            <h3> Parc Jean-Drapeau</h3>
+            <img
+            class="fit-picture"
+            src="C:\Users\xinsh\Documents\ETS\TCH056 - Prog web\travail de session\images_index\concert.jpg" width="100" height="100"
+            alt="concert Jean-drapeau" />
+            <h4> Description concert blablabla</h4>
+            <h5> Concerts</h5>
+        </article>
+
+        <article class="evenement">
+            <h2>Rolling Loud</h2>
+            <time datetime="2026-07-30">July 30th</time>
+            <h3> Sony Hall, New York</h3>
+            <img
+            class="fit-picture"
+            src="C:\Users\xinsh\Documents\ETS\TCH056 - Prog web\travail de session\images_index\RollingL.png" width="100" height="100"
+            alt="RL" />
+            <h4> Description concert blablabla</h4>
+            <h5> Concerts</h5>
+        </article>
+
+        
+        <article class="evenement">
+            <h2>Ferme en ville</h2>
+            <time datetime="2026-06-02">June 2nd</time>
+            <h3> Montreal</h3>
+            <img
+            class="fit-picture"
+            src="C:\Users\xinsh\Documents\ETS\TCH056 - Prog web\travail de session\images_index\farm.jpg" width="100" height="100"
+            alt="RL" />
+            <h4> Description ferme blablabla</h4>
+            <h5>activities</h5>
+        </article>
+
+        
+        <article class="evenement">
+            <h2>Exposition Banksy</h2>
+            <time datetime="2026-06-15">June 15th</time>
+            <h3> Montreal</h3>
+            <img
+            class="fit-picture"
+            src="C:\Users\xinsh\Documents\ETS\TCH056 - Prog web\travail de session\images_index\Banksy.jpg" width="100" height="100"
+            alt="Exposition Banksy" />
+            <h4> Description exposition blablabla</h4>
+            <h5>arts</h5>
+        </article>
+
+
+        <article class="evenement">
+            <h2>Match des Canadiens</h2>
+            <time datetime="2026-05-20">May 20th</time>
+            <h3> Montreal</h3>
+            <img
+            class="fit-picture"
+            src="C:\Users\xinsh\Documents\ETS\TCH056 - Prog web\travail de session\images_index\canadiens.png" width="100" height="100"
+            alt="Match des Canadiens" />
+            <h4> Description match blablabla</h4>
+            <h5>sports</h5>
+        </article>
+
+
+        <article class="evenement">
+            <h2>Festival de Jazz de Montreal</h2>
+            <time datetime="2026-06-27">June 27th</time>
+            <h3> Montreal</h3>
+            <img
+            class="fit-picture"
+            src="C:\Users\xinsh\Documents\ETS\TCH056 - Prog web\travail de session\images_index\jazz.jpg" width="100" height="100"
+            alt="Festival de Jazz de Montreal" />
+            <h4> Description festival blablabla</h4>
+            <h5> Concerts</h5>
+        </article>
+
+
+        <article class="evenement">
+            <h2>Randonnee au Mont-Royal</h2>
+            <time datetime="2026-05-10">May 10th</time>
+            <h3> Montreal</h3>
+            <img
+            class="fit-picture"
+            src="C:\Users\xinsh\Documents\ETS\TCH056 - Prog web\travail de session\images_index\mont-royal.jpg" width="100" height="100"
+            alt="Randonnee au Mont-Royal" />
+            <h4> Description randonnee blablabla</h4>
+            <h5>activities</h5>
+        </article>
+
+
+        <article class="evenement">
+            <h2>Tournoi de Basketball 3x3</h2>
+            <time datetime="2026-08-05">August 5th</time>
+            <h3> Toronto</h3>
+            <img
+            class="fit-picture"
+            src="C:\Users\xinsh\Documents\ETS\TCH056 - Prog web\travail de session\images_index\basketball.jpg" width="100" height="100"
+            alt="Tournoi de Basketball 3x3" />
+            <h4> Description tournoi blablabla</h4>
+            <h5>sports</h5>
+        </article>
+
+
+    </div>
+</body>
+</html>
