@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page principale</title>
+    <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
@@ -48,16 +49,20 @@
     </nav>
 
     <main>
+        <div class="grille-evenements">
         <article class="evenement">
             <h2>Soirée Jazz au quai</h2>
             <time datetime="2026-06-12 20:00">vendredi 12 juin 2026 à 20:00</time>
             <address>Maison de la Culture du Vieux-Port</address>
             <img
             class="fit-picture"
-            src="images_evenement/jazz-photo.jpg" width="200" height="200"
-            alt="Soirée Jazz au quai" />
+            src="images_evenement/jazz-photo.jpg"            alt="Soirée Jazz au quai" />
             <p>Concert de jazz contemporain au bord du fleuve.</p>
             <p class="categorie"> Concerts</p>
+            <div class="evenement-actions">
+                <a href="#">Détails</a>
+                <a href="#">Partager</a>
+            </div>
         </article>
 
         <article class="evenement">
@@ -66,36 +71,45 @@
             <address> Sony Hall, New York</address>
             <img
             class="fit-picture"
-            src="C:\Users\xinsh\Documents\ETS\TCH056 - Prog web\travail de session\images_index\RollingL.png" width="200" height="200"
-            alt="RL" />
+            src="images_index/RollingL.png"            alt="RL" />
             <p>Un festival hip-hop explosif réunissant les plus grands noms du rap international sur scène.</p>
             <p class="categorie"> Concerts</p>
+            <div class="evenement-actions">
+                <a href="#">Détails</a>
+                <a href="#">Partager</a>
+            </div>
         </article>
 
-        
+
         <article class="evenement">
             <h2>Ferme en ville</h2>
             <time datetime="2026-06-02">June 2nd</time>
             <address> Montreal</address>
             <img
             class="fit-picture"
-            src="C:\Users\xinsh\Documents\ETS\TCH056 - Prog web\travail de session\images_index\farm.jpg" width="200" height="200"
-            alt="RL" />
+            src="images_index/farm.jpg"            alt="Ferme" />
             <p>Découvrez l'agriculture urbaine en visitant des jardins et fermes communautaires au cœur de Montréal.</p>
             <p class="categorie">activities</p>
+            <div class="evenement-actions">
+                <a href="#">Détails</a>
+                <a href="#">Partager</a>
+            </div>
         </article>
 
-        
+
         <article class="evenement">
             <h2>Exposition Banksy</h2>
             <time datetime="2026-06-15">June 15th</time>
             <address> Montreal</address>
             <img
             class="fit-picture"
-            src="C:\Users\xinsh\Documents\ETS\TCH056 - Prog web\travail de session\images_index\Banksy.jpg" width="200" height="200"
-            alt="Exposition Banksy" />
+            src="images_index/Banksy.jpg"            alt="Exposition Banksy" />
             <p>Une plongée dans l'univers provocateur et engagé du célèbre artiste urbain anonyme Banksy.</p>
             <p class="categorie">arts</p>
+            <div class="evenement-actions">
+                <a href="#">Détails</a>
+                <a href="#">Partager</a>
+            </div>
         </article>
 
 
@@ -105,10 +119,13 @@
             <address> Montreal</address>
             <img
             class="fit-picture"
-            src="C:\Users\xinsh\Documents\ETS\TCH056 - Prog web\travail de session\images_index\canadiens.png" width="200" height="200"
-            alt="Match des Canadiens" />
+            src="images_index/canadiens.png"            alt="Match des Canadiens" />
             <p>Encouragez le Tricolore lors d'un match palpitant au Centre Bell dans une atmosphère électrisante.</p>
             <p class="categorie">sports</p>
+            <div class="evenement-actions">
+                <a href="#">Détails</a>
+                <a href="#">Partager</a>
+            </div>
         </article>
 
 
@@ -118,10 +135,13 @@
             <address> Montreal</address>
             <img
             class="fit-picture"
-            src="C:\Users\xinsh\Documents\ETS\TCH056 - Prog web\travail de session\images_index\jazz.jpg" width="200" height="200"
-            alt="Festival de Jazz de Montreal" />
+            src="images_index/jazz.jpg"            alt="Festival de Jazz de Montreal" />
             <p>Le plus grand festival de jazz au monde prend vie dans les rues de Montréal avec des centaines de spectacles gratuits et payants.</p>
             <p class="categorie"> Concerts</p>
+            <div class="evenement-actions">
+                <a href="#">Détails</a>
+                <a href="#">Partager</a>
+            </div>
         </article>
 
 
@@ -131,10 +151,13 @@
             <address> Montreal</address>
             <img
             class="fit-picture"
-            src="C:\Users\xinsh\Documents\ETS\TCH056 - Prog web\travail de session\images_index\mont-royal.jpg" width="200" height="200"
-            alt="Randonnee au Mont-Royal" />
+            src="images_index/mont-royal.jpg"            alt="Randonnee au Mont-Royal" />
             <p>Explorez les sentiers du Mont-Royal et profitez d'une vue panoramique sur la ville en pleine nature.</p>
             <p class="categorie">activities</p>
+            <div class="evenement-actions">
+                <a href="#">Détails</a>
+                <a href="#">Partager</a>
+            </div>
         </article>
 
 
@@ -144,14 +167,19 @@
             <address> Toronto</address>
             <img
             class="fit-picture"
-            src="C:\Users\xinsh\Documents\ETS\TCH056 - Prog web\travail de session\images_index\basketball.jpg" width="200" height="200"
-            alt="Tournoi de Basketball 3x3" />
+            src="images_index/basketball.jpg"            alt="Tournoi de Basketball 3x3" />
             <p>Assistez à un tournoi de basketball 3 contre 3 intense où les meilleures équipes de la région s'affrontent.</p>
             <p class="categorie">sports</p>
+            <div class="evenement-actions">
+                <a href="#">Détails</a>
+                <a href="#">Partager</a>
+            </div>
         </article>
-
-
+        </div>
     </main>
+    <footer>
+        <p>pied de page, mettre des liens ici </p>
+    </footer>
 </div>
 </body>
 </html>

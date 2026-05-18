@@ -50,3 +50,72 @@ main {
   padding: 10px;
 }
 
+footer {
+    grid-area: footer;
+    background-color: darkblue;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.grille-evenements {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.evenement {
+    background-color: white;
+    border: 1px solid #cccccc;
+    padding: 0;
+}
+
+.evenement img {
+    width: 100%;
+    display: block;
+}
+
+.evenement h2 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 10px 15px 5px;
+}
+
+.evenement time,
+.evenement address,
+.evenement p {
+    padding: 2px 15px;
+    font-size: 0.9rem;
+}
+
+
+
+.evenement-actions {
+    padding: 10px 15px 15px;
+}
+
+.evenement-actions a {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: darkblue;
+    color: white;
+    text-decoration: none;
+    border: 1px solid darkblue;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header"
+            "menu"
+            "content"
+            "footer";
+    }
+    .grille-evenements {
+        grid-template-columns: 1fr;
+    }
+    .filtre select {
+        width: 100%;
+    }
+}
