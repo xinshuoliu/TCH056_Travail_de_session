@@ -1,0 +1,62 @@
+@media screen {
+    .zone-principal {
+        border: 1px solid lightslategray;
+        display: grid;
+        background-color: lightgray;
+        grid-template-columns: 1fr;
+        grid-template-rows: 4rem auto 4rem;
+        grid-template-areas:
+                "header"
+                "principal"
+                "footer";
+    }
+
+    header {
+        grid-area: header;
+        text-align: center;
+        font-weight: bold;
+        background-color: grey;
+    }
+
+    main {
+        grid-area: principal;
+    }
+
+    footer {
+        grid-area: footer;
+    }
+
+    .grille-evenement {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    img {
+        width: 100%;
+    }
+}
+
+/* Petit-écran */
+
+@media (max-width: 640px) {
+    .grille-evenement {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
