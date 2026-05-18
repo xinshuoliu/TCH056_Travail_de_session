@@ -2,9 +2,9 @@
     .zone-principal {
         border: 1px solid lightslategray;
         display: grid;
-        background-color: lightgray;
+        background-color: lightblue;
         grid-template-columns: 1fr;
-        grid-template-rows: 4rem auto 4rem;
+        grid-template-rows: 4rem auto auto;
         grid-template-areas:
                 "header"
                 "principal"
@@ -15,15 +15,22 @@
         grid-area: header;
         text-align: center;
         font-weight: bold;
-        background-color: grey;
+        background-color: darkblue;
+        color: white;
     }
 
     main {
         grid-area: principal;
+        background-color: lightgrey;
+        padding: 10px;
     }
 
     footer {
         grid-area: footer;
+        background-color: darkblue;
+        color: white;
+        text-align: center;
+        padding: 20px;
     }
 
     .grille-evenement {
@@ -32,6 +39,29 @@
     }
     img {
         width: 100%;
+    }
+    .mots-cles {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        list-style: none;
+
+    }
+    .grille-similaires {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    .evenement {
+        background-color: white;
+        border: 1px solid #cccccc;
+        padding: 0;
+    }
+    .evenement-actions {
+        padding: 10px 15px 15px;
+    }
+    .colonne-infos {
+        padding: 15px;
     }
 }
 
