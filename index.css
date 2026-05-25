@@ -1,6 +1,6 @@
 * {
   margin: 0;
-  padding: 0;
+  padding: 0;  /*espace entre content et border*/
   box-sizing: border-box;
 }
 
@@ -38,7 +38,7 @@ header h1 {
   font-size: 2rem;
 }
 
-.filtres {
+.filtres {  /*tout les classes filtres*/
   grid-area: menu;
   background-color: beige;
   padding: 10px;
@@ -60,8 +60,8 @@ footer {
 
 .grille-evenements {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr;   /* 3 colonne egaux*/
+    gap: 20px;                          /*espace entre les evenements*/
 }
 
 .evenement {
@@ -72,10 +72,10 @@ footer {
 
 .evenement img {
     width: 100%;
-    display: block;
+    display: block;  /*alignement avec le text*/
 }
 
-.evenement h2 {
+.evenement h2 {    /*tout les h2 dans les classes evenemnt*/
     font-size: 1.2rem;
     font-weight: bold;
     padding: 10px 15px 5px;
@@ -85,7 +85,7 @@ footer {
 .evenement address,
 .evenement p {
     padding: 2px 15px;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 
