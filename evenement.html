@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,95 +10,46 @@
 <body>
 <div class="zone-principal">
 <header>
-    <h1>Concerts</h1>
+    <h1 id="ev-titre"></h1>
 </header>
     <main>
 
         <div class="grille-evenement">
-            <div class ="colonne-image">
-<img src="images_evenement/jazz-photo.jpg"><br>
+            <div class="colonne-image">
+                <img id="ev-image" src="" alt="">
             </div>
-            <div class ="colonne-infos">
+            <div class="colonne-infos">
 
-<h4>La Maison de la Culture du Vieux-Port présente </h4>
+                <h4 id="ev-lieu"></h4>
 
-<h1>Soirée Jazz au quai</h1>
-
-<p><strong>Date : </strong><time datetime="2026-06-12 20:00">Vendredi 12 juin 2026 à 20:00</time></p>
-<p><strong>Lieu :</strong> Maison de la Culture du Vieux-Port</p>
-<p><strong>Adresse :</strong> 120 Rue du Quai, Montréal, Québec, H3K 8T3</p>
-<p><strong>Prix :</strong> 25.00$</p>
-<p><strong>Public :</strong> Tous public</p>
-<p><strong>Catégorie :</strong> Accessible à tous</p>
+                <p><strong>Date : </strong><time id="ev-date"></time></p>
+                <p><strong>Adresse :</strong> <span id="ev-adresse"></span></p>
+                <p><strong>Ville :</strong> <span id="ev-ville"></span></p>
+                <p><strong>Prix :</strong> <span id="ev-prix"></span></p>
+                <p><strong>Public :</strong> <span id="ev-public"></span></p>
+                <p><strong>Catégorie :</strong> <span id="ev-categorie"></span></p>
 
                 <h2>Description</h2>
-                <p>Une soirée consacrée au jazz contemporain avec des musiciens de la scène locale.
-                    Le public est invité à découvrir des compositions originales dans une ambaiance détendue.
-                Un concert intime de jazz contemporain au bord du fleuve.</p>
+                <p id="ev-description-longue"></p>
 
-                <button class="favorite styled" type="button">Acheter</button>
+                <a id="ev-lien-externe" href="#" target="_blank" style="display:none;">
+                    <button class="favorite styled" type="button">Plus d'informations</button>
+                </a>
             </div>
         </div>
         <section>
             <h2>Événements similaires</h2>
-            <div class="grille-similaires">
-                <article class="evenement">
-                    <h2>Exposition Banksy</h2>
-                    <time datetime="2026-06-15">June 15th</time>
-                    <address> Montreal</address>
-                    <img
-                            class="fit-picture"
-                            src="images_index/Banksy.jpg"            alt="Exposition Banksy" />
-                    <p>Une plongée dans l'univers provocateur et engagé du célèbre artiste urbain anonyme Banksy.</p>
-                    <p class="categorie">arts</p>
-                    <div class="evenement-actions">
-                        <a href="#">Détails</a>
-                        <a href="#">Partager</a>
-                    </div>
-                </article>
-                <article class="evenement">
-                    <h2>Festival de Jazz de Montreal</h2>
-                    <time datetime="2026-06-27">June 27th</time>
-                    <address> Montreal</address>
-                    <img
-                            class="fit-picture"
-                            src="images_index/jazz.jpg"            alt="Festival de Jazz de Montreal" />
-                    <p>Le plus grand festival de jazz au monde prend vie dans les rues de Montréal avec des centaines de spectacles gratuits et payants.</p>
-                    <p class="categorie"> Concerts</p>
-                    <div class="evenement-actions">
-                        <a href="#">Détails</a>
-                        <a href="#">Partager</a>
-                    </div>
-                </article>
-                <article class="evenement">
-                    <h2>Tournoi de Basketball 3x3</h2>
-                    <time datetime="2026-08-05">August 5th</time>
-                    <address> Toronto</address>
-                    <img
-                            class="fit-picture"
-                            src="images_index/basketball.jpg"            alt="Tournoi de Basketball 3x3" />
-                    <p>Assistez à un tournoi de basketball 3 contre 3 intense où les meilleures équipes de la région s'affrontent.</p>
-                    <p class="categorie">sports</p>
-                    <div class="evenement-actions">
-                        <a href="#">Détails</a>
-                        <a href="#">Partager</a>
-                    </div>
-                </article>
-            </div>
-
+            <div class="grille-similaires" id="grille-similaires"></div>
         </section>
     </main>
 
     <footer>
-<P>Mots-clés</P>
-<ul class="mots-cles">
-    <li>Jazz</li>
-    <li>Blues</li>
-    <li>Saxophone</li>
-    <li>Concert</li>
-    <li>Ambiances</li>
-</ul>
-        </footer>
+        <p>Mots-clés</p>
+        <ul id="ev-mots-cles" class="mots-cles"></ul>
+    </footer>
 </div>
+
+<script src="data.js"></script>
+<script src="evenement.js"></script>
 </body>
 </html>
