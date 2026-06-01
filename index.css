@@ -103,6 +103,178 @@ footer {
     border: 1px solid darkblue;
 }
 
+
+.main-entete {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+
+.evenement {
+    position: relative;
+}
+
+.categorie-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background-color: darkblue;
+    color: white;
+    padding: 3px 10px;
+    font-size: 0.8rem;
+}
+
+
+.evenement-info {
+    padding: 10px 15px;
+}
+
+.evenement-info time {
+    display: block;
+    font-size: 0.9rem;
+    color: #555;
+    padding: 0;
+}
+
+.evenement-info h2 {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 5px 0;
+    padding: 0;
+}
+
+.evenement-info .description-courte {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    padding: 0;
+}
+
+.evenement-info dl {
+    font-size: 0.85rem;
+}
+
+.evenement-info dt {
+    float: left;
+    width: 55px;
+    font-weight: bold;
+    clear: left;
+    padding: 1px 0;
+}
+
+.evenement-info dd {
+    margin-left: 60px;
+    padding: 1px 0;
+}
+
+
+.btn-modifier,
+.btn-supprimer {
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    font-size: 0.85rem;
+    margin-right: 5px;
+}
+
+.btn-modifier  { background-color: #2196F3; }
+.btn-supprimer { background-color: #f44336; }
+
+
+.btn-ajouter-principal {
+    padding: 8px 18px;
+    background-color: darkblue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+
+.aucun-resultat {
+    padding: 20px;
+    font-style: italic;
+    color: #666;
+}
+
+/* --- Modal --- */
+#modal-formulaire {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-contenu {
+    background: white;
+    padding: 30px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-entete {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#btn-fermer-modal {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.form-groupe {
+    margin-bottom: 14px;
+}
+
+.form-groupe label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+}
+
+.form-groupe input,
+.form-groupe select,
+.form-groupe textarea {
+    width: 100%;
+    padding: 7px;
+    border: 1px solid #ccc;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+}
+
+.erreur-champ {
+    color: red;
+    font-size: 0.82rem;
+    display: block;
+    margin-top: 3px;
+}
+
+.btn-soumettre {
+    padding: 8px 20px;
+    background-color: darkblue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
 @media screen and (max-width: 768px) {
     .container {
         grid-template-columns: 1fr;

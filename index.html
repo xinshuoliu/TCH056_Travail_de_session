@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page principale</title>
+    <title>Agenda culturel local</title>
     <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="index.css">
 </head>
@@ -15,171 +15,126 @@
 
     <nav class="filtres">
         <div class="filtre">
-            <label for="choix-categories">Choisissez une categorie&nbsp;</label>
-            <select name="categories" id="choix-categories">
-                <option value="">Veuillez choisir une option</option>
-                <option value="Concerts">concert</option>
-                <option value="activities">activities</option>
-                <option value="arts">art</option>
-                <option value="sports">sports</option>
+            <label for="recherche">Recherche</label>
+            <input type="text" id="recherche" placeholder="Titre, lieu, ville">
+        </div>
+        <div class="filtre">
+            <label for="choix-categories">Catégorie</label>
+            <select id="choix-categories">
+                <option value="">Toutes les catégories</option>
             </select>
         </div>
-
         <div class="filtre">
-            <label for="choix-ville">Choisissez une ville&nbsp;</label>
-            <select name="ville" id="choix-ville">
-                <option value="">Veuillez choisir une option</option>
-                <option value="Montreal">Montreal</option>
-                <option value="Toronto">Toronto</option>
-                <option value="New York">NewYork</option>
-                <option value="Vancouver">Vancouver</option>
+            <label for="choix-ville">Ville</label>
+            <select id="choix-ville">
+                <option value="">Toutes les villes</option>
             </select>
         </div>
-
         <div class="filtre">
-            <label for="choix-public">Choisissez un public&nbsp;</label>
-            <select name="public" id="choix-public">
-                <option value="">Veuillez choisir une option</option>
-                <option value="Tous">tous</option>
-                <option value="Familles">fam</option>
-                <option value="adultes">adultes</option>
-                <option value="adolescents">ado</option>
+            <label for="choix-public">Public</label>
+            <select id="choix-public">
+                <option value="">Tous les publics</option>
+            </select>
+        </div>
+        <div class="filtre">
+            <label for="choix-tri">Tri</label>
+            <select id="choix-tri">
+                <option value="date">Date croissante</option>
+                <option value="prix">Prix croissant</option>
             </select>
         </div>
     </nav>
 
     <main>
-        <div class="grille-evenements">
-        <article class="evenement">
-            <h2>Soirée Jazz au quai</h2>
-            <time datetime="2026-06-12 20:00">vendredi 12 juin 2026 à 20:00</time>
-            <address>Maison de la Culture du Vieux-Port</address>
-            <img
-            class="fit-picture"
-            src="images_evenement/jazz-photo.jpg"  alt="Soirée Jazz au quai" />
-            <p>Concert de jazz contemporain au bord du fleuve.</p>
-            <p class="categorie"> Concerts</p>
-            <div class="evenement-actions">
-                <a href="#">Détails</a>
-                <a href="#">Partager</a>
-            </div>
-        </article>
-
-        <article class="evenement">
-            <h2>Rolling Loud</h2>
-            <time datetime="2026-07-30">July 30th</time>
-            <address> Sony Hall, New York</address>
-            <img
-            class="fit-picture"
-            src="images_index/RollingL.png"  alt="RL" />
-            <p>Un festival hip-hop explosif réunissant les plus grands noms du rap international sur scène.</p>
-            <p class="categorie"> Concerts</p>
-            <div class="evenement-actions">
-                <a href="#">Détails</a>
-                <a href="#">Partager</a>
-            </div>
-        </article>
-
-
-        <article class="evenement">
-            <h2>Ferme en ville</h2>
-            <time datetime="2026-06-02">June 2nd</time>
-            <address> Montreal</address>
-            <img
-            class="fit-picture"
-            src="images_index/farm.jpg" alt="Ferme" />
-            <p>Découvrez l'agriculture urbaine en visitant des jardins et fermes communautaires au cœur de Montréal.</p>
-            <p class="categorie">activities</p>
-            <div class="evenement-actions">
-                <a href="#">Détails</a>
-                <a href="#">Partager</a>
-            </div>
-        </article>
-
-
-        <article class="evenement">
-            <h2>Exposition Banksy</h2>
-            <time datetime="2026-06-15">June 15th</time>
-            <address> Montreal</address>
-            <img
-            class="fit-picture"
-            src="images_index/Banksy.jpg"  alt="Exposition Banksy" />
-            <p>Une plongée dans l'univers provocateur et engagé du célèbre artiste urbain anonyme Banksy.</p>
-            <p class="categorie">arts</p>
-            <div class="evenement-actions">
-                <a href="#">Détails</a>
-                <a href="#">Partager</a>
-            </div>
-        </article>
-
-
-        <article class="evenement">
-            <h2>Match des Canadiens</h2>
-            <time datetime="2026-05-20">May 20th</time>
-            <address> Montreal</address>
-            <img
-            class="fit-picture"
-            src="images_index/canadiens.png" alt="Match des Canadiens" />
-            <p>Encouragez le Tricolore lors d'un match palpitant au Centre Bell dans une atmosphère électrisante.</p>
-            <p class="categorie">sports</p>
-            <div class="evenement-actions">
-                <a href="#">Détails</a>
-                <a href="#">Partager</a>
-            </div>
-        </article>
-
-
-        <article class="evenement">
-            <h2>Festival de Jazz de Montreal</h2>
-            <time datetime="2026-06-27">June 27th</time>
-            <address> Montreal</address>
-            <img
-            class="fit-picture"
-            src="images_index/jazz.jpg" alt="Festival de Jazz de Montreal" />
-            <p>Le plus grand festival de jazz au monde prend vie dans les rues de Montréal avec des centaines de spectacles gratuits et payants.</p>
-            <p class="categorie"> Concerts</p>
-            <div class="evenement-actions">
-                <a href="#">Détails</a>
-                <a href="#">Partager</a>
-            </div>
-        </article>
-
-
-        <article class="evenement">
-            <h2>Randonnee au Mont-Royal</h2>
-            <time datetime="2026-05-10">May 10th</time>
-            <address> Montreal</address>
-            <img
-            class="fit-picture"
-            src="images_index/mont-royal.jpg" alt="Randonnee au Mont-Royal" />
-            <p>Explorez les sentiers du Mont-Royal et profitez d'une vue panoramique sur la ville en pleine nature.</p>
-            <p class="categorie">activities</p>
-            <div class="evenement-actions">
-                <a href="#">Détails</a>
-                <a href="#">Partager</a>
-            </div>
-        </article>
-
-
-        <article class="evenement">
-            <h2>Tournoi de Basketball 3x3</h2>
-            <time datetime="2026-08-05">August 5th</time>
-            <address> Toronto</address>
-            <img
-            class="fit-picture"
-            src="images_index/basketball.jpg alt="Tournoi de Basketball 3x3" />
-            <p>Assistez à un tournoi de basketball 3 contre 3 intense où les meilleures équipes de la région s'affrontent.</p>
-            <p class="categorie">sports</p>
-            <div class="evenement-actions">
-                <a href="#">Détails</a>
-                <a href="#">Partager</a>
-            </div>
-        </article>
+        <div class="main-entete">
+            <h2>Événements</h2>
+            <button id="btn-ajouter" class="btn-ajouter-principal">Ajouter</button>
         </div>
+        <div class="grille-evenements"></div>
     </main>
+
     <footer>
-        <p>pied de page </p>
+        <p>footer...</p>
     </footer>
 </div>
+
+<div id="modal-formulaire" role="dialog" aria-modal="true">
+    <div class="modal-contenu">
+        <div class="modal-entete">
+            <h2 id="modal-titre">Ajouter un événement</h2>
+            <button id="btn-fermer-modal" type="button" aria-label="Fermer">&times;</button>
+        </div>
+        <form id="form-evenement" novalidate>
+            <input type="hidden" id="evenement-id">
+
+            <div class="form-groupe">
+                <label for="champ-titre">Titre *</label>
+                <input type="text" id="champ-titre">
+                <span id="erreur-titre" class="erreur-champ"></span>
+            </div>
+            <div class="form-groupe">
+                <label for="champ-image">URL de l'image *</label>
+                <input type="text" id="champ-image">
+                <span id="erreur-image" class="erreur-champ"></span>
+            </div>
+            <div class="form-groupe">
+                <label for="champ-description-courte">Description courte *</label>
+                <input type="text" id="champ-description-courte">
+                <span id="erreur-description-courte" class="erreur-champ"></span>
+            </div>
+            <div class="form-groupe">
+                <label for="champ-description-longue">Description longue *</label>
+                <textarea id="champ-description-longue" rows="4"></textarea>
+                <span id="erreur-description-longue" class="erreur-champ"></span>
+            </div>
+            <div class="form-groupe">
+                <label for="champ-date">Date et heure *</label>
+                <input type="text" id="champ-date" placeholder="ex: 2026-06-12 à 20:00">
+                <span id="erreur-date" class="erreur-champ"></span>
+            </div>
+            <div class="form-groupe">
+                <label for="champ-lieu">Lieu *</label>
+                <input type="text" id="champ-lieu">
+                <span id="erreur-lieu" class="erreur-champ"></span>
+            </div>
+            <div class="form-groupe">
+                <label for="champ-adresse">Adresse *</label>
+                <input type="text" id="champ-adresse">
+                <span id="erreur-adresse" class="erreur-champ"></span>
+            </div>
+            <div class="form-groupe">
+                <label for="champ-ville">Ville *</label>
+                <select id="champ-ville">
+                    <option value="">Choisir une ville</option>
+                </select>
+                <span id="erreur-ville" class="erreur-champ"></span>
+            </div>
+            <div class="form-groupe">
+                <label for="champ-categorie">Catégorie *</label>
+                <select id="champ-categorie">
+                    <option value="">Choisir une catégorie</option>
+                </select>
+                <span id="erreur-categorie" class="erreur-champ"></span>
+            </div>
+            <div class="form-groupe">
+                <label for="champ-public">Public visé *</label>
+                <select id="champ-public">
+                    <option value="">Choisir un public</option>
+                </select>
+                <span id="erreur-public" class="erreur-champ"></span>
+            </div>
+            <div class="form-groupe">
+                <label for="champ-prix">Prix ($) *</label>
+                <input type="number" id="champ-prix" min="0" step="0.01" placeholder="0.00">
+                <span id="erreur-prix" class="erreur-champ"></span>
+            </div>
+
+            <button type="submit" class="btn-soumettre">Enregistrer</button>
+        </form>
+    </div>
+</div>
+
+<script src="data.js"></script>
+<script src="index.js"></script>
 </body>
 </html>

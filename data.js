@@ -36,7 +36,7 @@ const mots_cles = [
     { id: 14, mot: "sport" }
 ];
 
-const evenements = [
+let evenements = [
     {
         id: 1,
         titre: "Soirée Jazz au quai",
