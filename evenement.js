@@ -45,8 +45,7 @@ function afficher_evenement(evenement) {
     if (evenement.lien_externe) {
         const lien = document.getElementById('ev-lien-externe');
         lien.href = evenement.lien_externe;
-        // affichage du lien
-        lien.style.display = '';
+        lien.classList.remove('ev-lien-cache');
     }
 }
 
@@ -86,7 +85,7 @@ function afficher_similaires(evenement) {
 
         // clic vers la page de l'événement
         article.addEventListener('click', function() {
-            window.location.href = 'evenement.html?id=' + ev.id;
+            window.location.href = 'evenement.php?id=' + ev.id;
         });
 
         grille.appendChild(article);

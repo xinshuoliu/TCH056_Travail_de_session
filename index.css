@@ -38,6 +38,20 @@ header h1 {
   font-size: 2rem;
 }
 
+header nav {
+    margin-top: 8px;
+}
+
+.nav-utilisateur {
+    margin-right: 12px;
+    font-weight: bold;
+}
+
+.nav-lien {
+    color: white;
+    text-decoration: underline;
+}
+
 .filtres {  /*tout les classes filtres*/
   grid-area: menu;
   background-color: beige;

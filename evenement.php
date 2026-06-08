@@ -1,17 +1,34 @@
+<?php
+require_once 'config.php';
+$estConnecte = isset($_SESSION['utilisateur']);
+$estAdmin    = $estConnecte && $_SESSION['utilisateur']['type'] === 'admin';
+?>
 <!doctype html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sorties Culturelles</title>
+    <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="evenement.css">
-
 </head>
 <body>
 <div class="zone-principal">
 <header>
-    <a href="index.html">&larr; Retour aux événements</a>
-    <h1 id="ev-titre"></h1>
+    <div class="entete-contenu">
+        <a href="index.php" class="lien-retour">&larr; Retour aux événements</a>
+        <h1 id="ev-titre"></h1>
+    </div>
+    <nav>
+        <?php if ($estConnecte): ?>
+            <span class="nav-utilisateur">
+                <?= htmlspecialchars($_SESSION['utilisateur']['prenom']) ?>
+            </span>
+            <a href="deconnexion.php" class="nav-lien">Déconnexion</a>
+        <?php else: ?>
+            <a href="login.php" class="nav-lien">Connexion</a>
+        <?php endif; ?>
+    </nav>
 </header>
     <main>
 
@@ -33,7 +50,7 @@
                 <h2>Description</h2>
                 <p id="ev-description-longue"></p>
 
-                <a id="ev-lien-externe" href="#" target="_blank" style="display:none;">
+                <a id="ev-lien-externe" href="#" target="_blank" class="ev-lien-cache">
                     <button class="favorite styled" type="button">Plus d'informations</button>
                 </a>
             </div>

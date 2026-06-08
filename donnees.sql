@@ -116,6 +116,9 @@ INSERT INTO evenements (titre, image, description_courte, description_longue, da
         2, 4, 1, 12.00);
 
 
+-- Compte admin : exécuter creer_admin.php dans le navigateur 
+-- Identifiants : admin / Admin1234!
+
 INSERT INTO evenements_mots_cles (evenement_id, mot_cle_id) VALUES
     (1, 1),
     (1, 2),

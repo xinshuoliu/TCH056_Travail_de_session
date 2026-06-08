@@ -13,11 +13,36 @@
 
     header {
         grid-area: header;
-        text-align: center;
-        font-weight: bold;
         background-color: darkblue;
         color: white;
         padding: 12px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .entete-contenu {
+        text-align: left;
+    }
+
+    .lien-retour {
+        color: white;
+        text-decoration: none;
+        font-size: 0.9rem;
+    }
+
+    .nav-utilisateur {
+        margin-right: 12px;
+        font-weight: bold;
+    }
+
+    .nav-lien {
+        color: white;
+        text-decoration: underline;
+    }
+
+    .ev-lien-cache {
+        display: none;
     }
 
     main {
