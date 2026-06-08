@@ -1,56 +1,24 @@
 // 4. filtres
 
 function afficher_filtres() {
-    // sélecteurs du filtre
-    const selCategorie = document.getElementById('choix-categories');
-    const selVille     = document.getElementById('choix-ville');
-    const selPublic    = document.getElementById('choix-public');
-
-    // options catégories
-    selCategorie.innerHTML = '<option value="">Toutes les catégories</option>';
-    categories.forEach(function(c) {
-        const opt = document.createElement('option');
-        opt.value = c.id;
-        opt.textContent = c.nom;
-        selCategorie.appendChild(opt);
-    });
-
-    // options villes
-    selVille.innerHTML = '<option value="">Toutes les villes</option>';
-    villes.forEach(function(v) {
-        const opt = document.createElement('option');
-        opt.value = v.id;
-        opt.textContent = v.nom;
-        selVille.appendChild(opt);
-    });
-
-    // options publics
-    selPublic.innerHTML = '<option value="">Tous les publics</option>';
-    publics.forEach(function(p) {
-        const opt = document.createElement('option');
-        opt.value = p.id;
-        opt.textContent = p.nom;
-        selPublic.appendChild(opt);
-    });
-
-    // sélecteurs du formulaire
+    // Les filtres de la page sont générés par PHP depuis la BD.
+    // Cette fonction remplit uniquement les selects du formulaire modal (admin).
     const formCat    = document.getElementById('champ-categorie');
     const formVille  = document.getElementById('champ-ville');
     const formPublic = document.getElementById('champ-public');
 
-    // options formulaire catégories
+    if (!formCat) return; // modal absent (utilisateur non-admin)
+
     categories.forEach(function(c) {
         const opt = document.createElement('option');
         opt.value = c.id; opt.textContent = c.nom;
         formCat.appendChild(opt);
     });
-    // options formulaire villes
     villes.forEach(function(v) {
         const opt = document.createElement('option');
         opt.value = v.id; opt.textContent = v.nom;
         formVille.appendChild(opt);
     });
-    // options formulaire publics
     publics.forEach(function(p) {
         const opt = document.createElement('option');
         opt.value = p.id; opt.textContent = p.nom;
@@ -94,29 +62,37 @@ function afficher_evenement_resume(evenement) {
                 '<dt>Prix</dt>   <dd>' + prix + '</dd>' +
             '</dl>' +
         '</div>' +
-        '<div class="evenement-actions">' +
-            '<button class="btn-modifier">Modifier</button>' +
-            '<button class="btn-supprimer">Supprimer</button>' +
-        '</div>';
+        (estAdmin
+            ? '<div class="evenement-actions">' +
+                '<button class="btn-modifier">Modifier</button>' +
+                '<button class="btn-supprimer">Supprimer</button>' +
+              '</div>'
+            : '');
 
     // clic vers la page détail 
     article.addEventListener('click', function(e) {
         if (!e.target.closest('.evenement-actions')) {
-            window.location.href = 'evenement.html?id=' + evenement.id;
+            window.location.href = 'evenement.php?id=' + evenement.id;
         }
     });
 
     // bouton modifier
-    article.querySelector('.btn-modifier').addEventListener('click', function(e) {
-        e.stopPropagation();
-        ouvrir_formulaire_modification(evenement.id);
-    });
+    const btnModifier = article.querySelector('.btn-modifier');
+    if (btnModifier) {
+        btnModifier.addEventListener('click', function(e) {
+            e.stopPropagation();
+            ouvrir_formulaire_modification(evenement.id);
+        });
+    }
 
     // bouton supprimer
-    article.querySelector('.btn-supprimer').addEventListener('click', function(e) {
-        e.stopPropagation();
-        supprimer_evenement(evenement.id);
-    });
+    const btnSupprimer = article.querySelector('.btn-supprimer');
+    if (btnSupprimer) {
+        btnSupprimer.addEventListener('click', function(e) {
+            e.stopPropagation();
+            supprimer_evenement(evenement.id);
+        });
+    }
 
     return article;
 }
@@ -342,13 +318,18 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('choix-tri').addEventListener('change', filtrer_evenements);
     document.getElementById('recherche').addEventListener('input', filtrer_evenements);
 
-    // écouteurs formulaire
-    document.getElementById('btn-ajouter').addEventListener('click', function() { ouvrir_formulaire(); });
-    document.getElementById('btn-fermer-modal').addEventListener('click', fermer_formulaire);
-    document.getElementById('form-evenement').addEventListener('submit', soumettre_formulaire);
+    // écouteurs formulaire (absents si non-admin)
+    const btnAjouter = document.getElementById('btn-ajouter');
+    if (btnAjouter) btnAjouter.addEventListener('click', function() { ouvrir_formulaire(); });
 
-    // fermeture modal sur clic dehors
-    document.getElementById('modal-formulaire').addEventListener('click', function(e) {
-        if (e.target === document.getElementById('modal-formulaire')) fermer_formulaire();
+    const btnFermerModal = document.getElementById('btn-fermer-modal');
+    if (btnFermerModal) btnFermerModal.addEventListener('click', fermer_formulaire);
+
+    const formEvenement = document.getElementById('form-evenement');
+    if (formEvenement) formEvenement.addEventListener('submit', soumettre_formulaire);
+
+    const modal = document.getElementById('modal-formulaire');
+    if (modal) modal.addEventListener('click', function(e) {
+        if (e.target === modal) fermer_formulaire();
     });
 });

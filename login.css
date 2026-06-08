@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: darkblue;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 1.5rem;
+}
+
+.nav-utilisateur {
+    margin-right: 12px;
+    font-weight: bold;
+}
+
+.nav-lien {
+    color: white;
+    text-decoration: underline;
+}
+
+footer {
+    background-color: darkblue;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: auto;
+}
+
+.connexion-main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    background-color: #f0f0f0;
+}
+
+.connexion-boite {
+    background: white;
+    padding: 30px 40px;
+    width: 100%;
+    max-width: 420px;
+    border: 1px solid #ccc;
+}
+
+.connexion-boite h2 {
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+}
+
+.erreur-connexion {
+    color: red;
+    font-size: 0.9rem;
+    margin-bottom: 14px;
+}
+
+.form-groupe {
+    margin-bottom: 14px;
+}
+
+.form-groupe label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+}
+
+.form-groupe input {
+    width: 100%;
+    padding: 7px;
+    border: 1px solid #ccc;
+    font-size: 0.95rem;
+}
+
+.erreur-champ {
+    color: red;
+    font-size: 0.82rem;
+    display: block;
+    margin-top: 3px;
+}
+
+.btn-soumettre {
+    width: 100%;
+    padding: 10px;
+    background-color: darkblue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 6px;
+}
+
+.btn-soumettre:hover {
+    background-color: #00008b;
+}
+
+.lien-compte {
+    margin-top: 16px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.lien-compte a {
+    color: darkblue;
+}

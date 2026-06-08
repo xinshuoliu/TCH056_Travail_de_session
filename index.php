@@ -1,3 +1,13 @@
+<?php
+require_once 'config.php';
+
+$categories = get_categories($pdo);
+$villes     = get_villes($pdo);
+$publics    = get_publics($pdo);
+
+$estConnecte = isset($_SESSION['utilisateur']);
+$estAdmin    = $estConnecte && $_SESSION['utilisateur']['type'] === 'admin';
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -11,6 +21,16 @@
 <div class="container">
     <header>
         <h1>Agenda culturel local</h1>
+        <nav>
+            <?php if ($estConnecte): ?>
+                <span class="nav-utilisateur">
+                    <?= htmlspecialchars($_SESSION['utilisateur']['prenom']) ?>
+                </span>
+                <a href="deconnexion.php" class="nav-lien">Déconnexion</a>
+            <?php else: ?>
+                <a href="login.php" class="nav-lien">Connexion</a>
+            <?php endif; ?>
+        </nav>
     </header>
 
     <nav class="filtres">
@@ -22,18 +42,27 @@
             <label for="choix-categories">Catégorie</label>
             <select id="choix-categories">
                 <option value="">Toutes les catégories</option>
+                <?php foreach ($categories as $cat): ?>
+                    <option value="<?= (int)$cat['id'] ?>"><?= htmlspecialchars($cat['nom']) ?></option>
+                <?php endforeach; ?>
             </select>
         </div>
         <div class="filtre">
             <label for="choix-ville">Ville</label>
             <select id="choix-ville">
                 <option value="">Toutes les villes</option>
+                <?php foreach ($villes as $ville): ?>
+                    <option value="<?= (int)$ville['id'] ?>"><?= htmlspecialchars($ville['nom']) ?></option>
+                <?php endforeach; ?>
             </select>
         </div>
         <div class="filtre">
             <label for="choix-public">Public</label>
             <select id="choix-public">
                 <option value="">Tous les publics</option>
+                <?php foreach ($publics as $pub): ?>
+                    <option value="<?= (int)$pub['id'] ?>"><?= htmlspecialchars($pub['nom']) ?></option>
+                <?php endforeach; ?>
             </select>
         </div>
         <div class="filtre">
@@ -48,7 +77,9 @@
     <main>
         <div class="main-entete">
             <h2>Événements</h2>
-            <button id="btn-ajouter" class="btn-ajouter-principal">Ajouter</button>
+            <?php if ($estAdmin): ?>
+                <button id="btn-ajouter" class="btn-ajouter-principal">Ajouter</button>
+            <?php endif; ?>
         </div>
         <div class="grille-evenements"></div>
     </main>
@@ -58,6 +89,7 @@
     </footer>
 </div>
 
+<?php if ($estAdmin): ?>
 <div id="modal-formulaire" role="dialog" aria-modal="true">
     <div class="modal-contenu">
         <div class="modal-entete">
@@ -134,6 +166,9 @@
     </div>
 </div>
 
+<?php endif; ?>
+
+<script>const estAdmin = <?= $estAdmin ? 'true' : 'false' ?>;</script>
 <script src="data.js"></script>
 <script src="index.js"></script>
 </body>
