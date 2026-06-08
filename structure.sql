@@ -1,8 +1,4 @@
-CREATE DATABASE IF NOT EXISTS sorties_culturelles
-    CHARACTER SET utf8mb4
-    COLLATE utf8mb4_unicode_ci;
-
-USE sorties_culturelles;
+USE mydatabase;
 
 CREATE TABLE categories (
     id  INT AUTO_INCREMENT PRIMARY KEY,

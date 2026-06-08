@@ -1,5 +1,5 @@
 
-USE sorties_culturelles;
+USE mydatabase;
 
 INSERT INTO categories (nom) VALUES
     ('Concert'),

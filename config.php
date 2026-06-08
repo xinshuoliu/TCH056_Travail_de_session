@@ -2,7 +2,7 @@
 session_start();
 
 try {
-    $pdo = new PDO("mysql:host=db;dbname=sorties_culturelles;charset=utf8mb4",
+    $pdo = new PDO("mysql:host=db;dbname=mydatabase;charset=utf8mb4",
         "root", "rootpassword");
      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e){
