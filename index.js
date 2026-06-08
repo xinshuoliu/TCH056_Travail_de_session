@@ -99,7 +99,7 @@ function afficher_evenement_resume(evenement) {
             '<button class="btn-supprimer">Supprimer</button>' +
         '</div>';
 
-    // clic vers la page détail (ignore les boutons)
+    // clic vers la page détail 
     article.addEventListener('click', function(e) {
         if (!e.target.closest('.evenement-actions')) {
             window.location.href = 'evenement.html?id=' + evenement.id;
@@ -261,7 +261,7 @@ function valider_formulaire(donnees) {
 }
 
 function soumettre_formulaire(e) {
-    e.preventDefault();
+    e.preventDefault();  //eviter le rechargement par default
 
     // lecture des données du formulaire
     const donnees = {
