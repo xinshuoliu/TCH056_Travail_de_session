@@ -4,6 +4,11 @@ require_once 'config.php';
 $categories = get_categories($pdo);
 $villes     = get_villes($pdo);
 $publics    = get_publics($pdo);
+$evenements_js = get_evenements($pdo);
+
+$categories_js = array_map(function($c) { return ['id' => (int)$c['id'], 'nom' => $c['nom']]; }, $categories);
+$villes_js     = array_map(function($v) { return ['id' => (int)$v['id'], 'nom' => $v['nom']]; }, $villes);
+$publics_js    = array_map(function($p) { return ['id' => (int)$p['id'], 'nom' => $p['nom']]; }, $publics);
 
 $estConnecte = isset($_SESSION['utilisateur']);
 $estAdmin    = $estConnecte && $_SESSION['utilisateur']['type'] === 'admin';
@@ -85,7 +90,7 @@ $estAdmin    = $estConnecte && $_SESSION['utilisateur']['type'] === 'admin';
     </main>
 
     <footer>
-        <p>footer...</p>
+        <p>Xin &amp; Olivier</p>
     </footer>
 </div>
 
@@ -168,8 +173,13 @@ $estAdmin    = $estConnecte && $_SESSION['utilisateur']['type'] === 'admin';
 
 <?php endif; ?>
 
-<script>const estAdmin = <?= $estAdmin ? 'true' : 'false' ?>;</script>
-<script src="data.js"></script>
+<script>
+const estAdmin   = <?= $estAdmin ? 'true' : 'false' ?>;
+const categories = <?= json_encode($categories_js) ?>;
+const villes     = <?= json_encode($villes_js) ?>;
+const publics    = <?= json_encode($publics_js) ?>;
+let evenements   = <?= json_encode($evenements_js) ?>;
+</script>
 <script src="index.js"></script>
 </body>
 </html>

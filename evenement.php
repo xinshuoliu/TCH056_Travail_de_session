@@ -2,6 +2,16 @@
 require_once 'config.php';
 $estConnecte = isset($_SESSION['utilisateur']);
 $estAdmin    = $estConnecte && $_SESSION['utilisateur']['type'] === 'admin';
+
+$categories    = get_categories($pdo);
+$villes        = get_villes($pdo);
+$publics       = get_publics($pdo);
+$evenements_js = get_evenements($pdo);
+$mots_cles_js  = get_mots_cles($pdo);
+
+$categories_js = array_map(function($c) { return ['id' => (int)$c['id'], 'nom' => $c['nom']]; }, $categories);
+$villes_js     = array_map(function($v) { return ['id' => (int)$v['id'], 'nom' => $v['nom']]; }, $villes);
+$publics_js    = array_map(function($p) { return ['id' => (int)$p['id'], 'nom' => $p['nom']]; }, $publics);
 ?>
 <!doctype html>
 <html lang="fr">
@@ -67,7 +77,13 @@ $estAdmin    = $estConnecte && $_SESSION['utilisateur']['type'] === 'admin';
     </footer>
 </div>
 
-<script src="data.js"></script>
+<script>
+const categories = <?= json_encode($categories_js) ?>;
+const villes     = <?= json_encode($villes_js) ?>;
+const publics    = <?= json_encode($publics_js) ?>;
+const mots_cles  = <?= json_encode($mots_cles_js) ?>;
+let evenements   = <?= json_encode($evenements_js) ?>;
+</script>
 <script src="evenement.js"></script>
 </body>
 </html>
