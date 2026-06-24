@@ -49,15 +49,8 @@ function afficher_evenement(evenement) {
     }
 }
 
-// événements similaires
-
-function afficher_similaires(evenement) {
-    // même catégorie ou même ville, exclu lui-même
-    const similaires = evenements.filter(function(ev) {
-        if (ev.id === evenement.id) return false;
-        return ev.categorie_id === evenement.categorie_id || ev.ville_id === evenement.ville_id;
-    });
-
+// reçoit le tableau de similaires directement depuis l'API (GET /api/evenements/:id/similaires)
+function afficher_similaires(similaires) {
     const grille = document.getElementById('grille-similaires');
     grille.innerHTML = '';
 
@@ -99,14 +92,35 @@ document.addEventListener('DOMContentLoaded', function() {
     const params = new URLSearchParams(window.location.search);
     const id = parseInt(params.get('id'));
 
-    // recherche de l'événement
-    const evenement = evenements.find(function(e) { return e.id === id; });
+    // chargement de l'événement depuis l'API, puis des similaires
+    fetch('/api/evenements/' + id)
+        .then(function(response) {
+            if (!response.ok) {
+                throw new Error('Erreur HTTP : ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(function(data) {
+            if (data.erreur)
+                throw new Error('Erreur reçue du serveur : ' + data.erreur);
 
-    if (evenement) {
-        afficher_evenement(evenement);
-        afficher_similaires(evenement);
-    } else {
-        // événement non trouvé
-        document.querySelector('main').innerHTML = '<p>Événement introuvable.</p>';
-    }
+            afficher_evenement(data);
+
+            fetch('/api/evenements/' + id + '/similaires')
+                .then(function(response) {
+                    if (!response.ok) {
+                        throw new Error('Erreur HTTP : ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(function(similaires) {
+                    afficher_similaires(similaires);
+                })
+                .catch(function(erreur) {
+                    document.getElementById('grille-similaires').innerHTML = '<p>' + erreur.message + '</p>';
+                });
+        })
+        .catch(function(erreur) {
+            document.querySelector('main').innerHTML = '<p>' + erreur.message + '</p>';
+        });
 });

@@ -1,4 +1,12 @@
-// 4. filtres
+// Tableau global rempli par un fetch depuis /api/evenements à chaque 
+// appel de filtrer_evenements()
+
+let evenements = []; 
+
+// page active dans la liste paginée; remise à 1 à chaque changement de filtre
+let pageCourante = 1;
+
+// filtres
 
 function afficher_filtres() {
     // Les filtres de la page sont générés par PHP depuis la BD.
@@ -113,6 +121,36 @@ function afficher_evenements(liste) {
     liste.forEach(function(ev) { grille.appendChild(afficher_evenement_resume(ev)); });
 }
 
+// pagination 
+
+// affiche les boutons Précédent / Suivant selon la page et le total retournés par l'API
+function afficher_pagination(data) {
+    const pagination = document.querySelector('.pagination');
+    pagination.innerHTML = '';
+
+    if (data.pages <= 1) return;
+
+    if (data.page > 1) {
+        const btnPrev = document.createElement('button');
+        btnPrev.textContent = 'Précédent';
+        btnPrev.addEventListener('click', function() {
+            pageCourante = data.page - 1;
+            filtrer_evenements();
+        });
+        pagination.appendChild(btnPrev);
+    }
+
+    if (data.page < data.pages) {
+        const btnSuiv = document.createElement('button');
+        btnSuiv.textContent = 'Suivant';
+        btnSuiv.addEventListener('click', function() {
+            pageCourante = data.page + 1;
+            filtrer_evenements();
+        });
+        pagination.appendChild(btnSuiv);
+    }
+}
+
 // filtres et tri
 
 function filtrer_evenements() {
@@ -123,31 +161,49 @@ function filtrer_evenements() {
     const tri         = document.getElementById('choix-tri').value;
     const recherche   = document.getElementById('recherche').value.toLowerCase();
 
-    // application des filtres
-    let resultats = evenements.filter(function(ev) {
-        if (categorieId && ev.categorie_id !== categorieId) return false;
-        if (villeId     && ev.ville_id      !== villeId)    return false;
-        if (publicId    && ev.public_id     !== publicId)   return false;
-        if (recherche) {
-            // recherche dans titre, lieu, ville
-            const villeEv  = villes.find(function(v) { return v.id === ev.ville_id; });
-            const nomVille = villeEv ? villeEv.nom.toLowerCase() : '';
-            const match = ev.titre.toLowerCase().includes(recherche)
-                       || ev.lieu.toLowerCase().includes(recherche)
-                       || nomVille.includes(recherche);
-            if (!match) return false;
-        }
-        return true;
-    });
+    // construction des paramètres URL
+    const params = new URLSearchParams();
+    if(categorieId) params.set('categorie', categorieId);
+    if(villeId) params.set('ville', villeId);
+    if(publicId) params.set('public', publicId);
+    if(tri) params.set('tri', tri);
+    params.set('page', pageCourante);
 
-    // tri par date ou prix
-    if (tri === 'date') {
-        resultats.sort(function(a, b) { return a.date_heure.localeCompare(b.date_heure); });
-    } else if (tri === 'prix') {
-        resultats.sort(function(a, b) { return a.prix - b.prix; });
-    }
+    // chargement des événements depuis l'API (catégorie/ville/public/tri côté serveur, 
+    // recherche textuelle côté client)
 
-    afficher_evenements(resultats);
+    fetch('/api/evenements?' + params.toString())
+        .then(function(response) {
+            if (!response.ok) {
+                throw new Error('Erreur HTTP : ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(function(data) {
+            if (data.erreur)
+                throw new Error('Erreur reçue du serveur : ' + data.erreur);
+
+            let resultats = data.evenements;
+
+            if (recherche) {
+                resultats = resultats.filter(function(ev) {
+                    const villeEv  = villes.find(function(v) { return v.id === ev.ville_id; });
+                    const nomVille = villeEv ? villeEv.nom.toLowerCase() : '';
+                    return ev.titre.toLowerCase().includes(recherche)
+                        || ev.lieu.toLowerCase().includes(recherche)
+                        || nomVille.includes(recherche);
+                });
+            }
+
+            evenements = data.evenements;
+            afficher_evenements(resultats);
+            afficher_pagination(data);
+        })
+        .catch(function(erreur) {
+            const grille = document.querySelector('.grille-evenements');
+            grille.innerHTML = '<p class="erreur">' + erreur.message + '</p>';
+        });
+
 }
 
 // suppression
@@ -155,9 +211,26 @@ function filtrer_evenements() {
 function supprimer_evenement(id) {
     // confirmation avant suppression
     if (!confirm('Voulez-vous vraiment supprimer cet événement ?')) return;
-    evenements = evenements.filter(function(e) { return e.id !== id; });
-    filtrer_evenements();
+
+    // suppression persistante via l'API — retire l'événement de la base de données
+    fetch('/api/evenements/' + id, { method: 'DELETE' })
+        .then(function(response) {
+            if (response.status === 403)
+                throw new Error ('Permission refusée - vous devez être administrateur.');
+            if (!response.ok)
+                throw new Error('Erreur HTTP : ' + response.statusText);
+            return response.json();
+        })
+        .then(function(data) {
+            if (data.erreur)
+                throw new Error('Erreur de serveur : ' + data.erreur);
+            filtrer_evenements();
+        })
+        .catch(function(erreur) {
+            alert(erreur.message);
+        });
 }
+
 
 // formulaire modal
 
@@ -256,54 +329,56 @@ function soumettre_formulaire(e) {
 
     if (!valider_formulaire(donnees)) return;
 
+    // id présent = modification, absent = création
     const idExistant = document.getElementById('evenement-id').value;
 
     if (idExistant) {
-        // mise à jour événement existant
-        const idx = evenements.findIndex(function(e) { return e.id === parseInt(idExistant); });
-        if (idx !== -1) {
-            evenements[idx].titre              = donnees.titre;
-            evenements[idx].image              = donnees.image;
-            evenements[idx].description_courte = donnees.description_courte;
-            evenements[idx].description_longue = donnees.description_longue;
-            evenements[idx].date_heure         = donnees.date_heure;
-            evenements[idx].lieu               = donnees.lieu;
-            evenements[idx].adresse            = donnees.adresse;
-            evenements[idx].ville_id           = donnees.ville_id;
-            evenements[idx].categorie_id       = donnees.categorie_id;
-            evenements[idx].public_id          = donnees.public_id;
-            evenements[idx].prix               = donnees.prix;
-        }
+        // mise à jour via PUT — sauvegarde les modifications en base de données
+        fetch('/api/evenements/' + idExistant, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(donnees)
+        })
+            .then(function(response) {
+                if (response.status === 403)
+                    throw new Error('Permission refusée - vous devez être administrateur.');
+                if (!response.ok)
+                    throw new Error('Erreur HTTP : ' + response.statusText);
+                return response.json();
+            })
+            .then(function(data) {
+                if (data.erreur)
+                    throw new Error('Erreur reçue du serveur : ' + data.erreur);
+                fermer_formulaire();
+                filtrer_evenements();
+            })
+            .catch(function(erreur) {
+                alert(erreur.message);
+            });
     } else {
-        // nouvel id unique
-        let nouvelId = 1;
-        for (let i = 0; i < evenements.length; i++) {
-            if (evenements[i].id >= nouvelId) {
-                nouvelId = evenements[i].id + 1;
-            }
-        }
-        // ajout du nouvel événement
-        const nouvelEvenement = {
-            id:                 nouvelId,
-            titre:              donnees.titre,
-            image:              donnees.image,
-            description_courte: donnees.description_courte,
-            description_longue: donnees.description_longue,
-            date_heure:         donnees.date_heure,
-            lieu:               donnees.lieu,
-            adresse:            donnees.adresse,
-            ville_id:           donnees.ville_id,
-            categorie_id:       donnees.categorie_id,
-            public_id:          donnees.public_id,
-            prix:               donnees.prix,
-            mots_cles_ids:      [],
-            lien_externe:       null
-        };
-        evenements.push(nouvelEvenement);
+        // création via POST — insère le nouvel événement en base de données
+        fetch('/api/evenements', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(donnees)
+        })
+            .then(function(response) {
+                if (response.status === 403)
+                    throw new Error('Permission refusée - vous devez être administrateur.');
+                if (!response.ok)
+                    throw new Error('Erreur HTTP : ' + response.statusText);
+                return response.json();
+            })
+            .then(function(data) {
+                if (data.erreur)
+                    throw new Error('Erreur reçue du serveur : ' + data.erreur);
+                fermer_formulaire();
+                filtrer_evenements();
+            })
+            .catch(function(erreur) {
+                alert(erreur.message);
+            });
     }
-
-    fermer_formulaire();
-    filtrer_evenements();
 }
 
 // initialiser
@@ -311,12 +386,12 @@ document.addEventListener('DOMContentLoaded', function() {
     afficher_filtres();
     filtrer_evenements();
 
-    // écouteurs filtres et recherche
-    document.getElementById('choix-categories').addEventListener('change', filtrer_evenements);
-    document.getElementById('choix-ville').addEventListener('change', filtrer_evenements);
-    document.getElementById('choix-public').addEventListener('change', filtrer_evenements);
-    document.getElementById('choix-tri').addEventListener('change', filtrer_evenements);
-    document.getElementById('recherche').addEventListener('input', filtrer_evenements);
+    // écouteurs filtres et recherche — repart toujours à la page 1 lors d'un changement de filtre
+    document.getElementById('choix-categories').addEventListener('change', function() { pageCourante = 1; filtrer_evenements(); });
+    document.getElementById('choix-ville').addEventListener('change',      function() { pageCourante = 1; filtrer_evenements(); });
+    document.getElementById('choix-public').addEventListener('change',     function() { pageCourante = 1; filtrer_evenements(); });
+    document.getElementById('choix-tri').addEventListener('change',        function() { pageCourante = 1; filtrer_evenements(); });
+    document.getElementById('recherche').addEventListener('input',         function() { pageCourante = 1; filtrer_evenements(); });
 
     // écouteurs formulaire (absents si non-admin)
     const btnAjouter = document.getElementById('btn-ajouter');

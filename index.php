@@ -4,7 +4,6 @@ require_once 'config.php';
 $categories = get_categories($pdo);
 $villes     = get_villes($pdo);
 $publics    = get_publics($pdo);
-$evenements_js = get_evenements($pdo);
 
 $categories_js = array_map(function($c) { return ['id' => (int)$c['id'], 'nom' => $c['nom']]; }, $categories);
 $villes_js     = array_map(function($v) { return ['id' => (int)$v['id'], 'nom' => $v['nom']]; }, $villes);
@@ -87,6 +86,7 @@ $estAdmin    = $estConnecte && $_SESSION['utilisateur']['type'] === 'admin';
             <?php endif; ?>
         </div>
         <div class="grille-evenements"></div>
+        <div class="pagination"></div>
     </main>
 
     <footer>
@@ -178,7 +178,6 @@ const estAdmin   = <?= $estAdmin ? 'true' : 'false' ?>;
 const categories = <?= json_encode($categories_js) ?>;
 const villes     = <?= json_encode($villes_js) ?>;
 const publics    = <?= json_encode($publics_js) ?>;
-let evenements   = <?= json_encode($evenements_js) ?>;
 </script>
 <script src="index.js"></script>
 </body>
