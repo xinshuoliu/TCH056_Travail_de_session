@@ -29,6 +29,7 @@ CREATE TABLE evenements (
     categorie_id       INT,
     public_id          INT,
     prix               DECIMAL(10,2) DEFAULT 0.00,
+    accessibilite      VARCHAR(100),
     lien_externe       VARCHAR(500),
     FOREIGN KEY (ville_id)     REFERENCES villes(id)     ON DELETE SET NULL,
     FOREIGN KEY (categorie_id) REFERENCES categories(id) ON DELETE SET NULL,

@@ -78,7 +78,7 @@ $router->get('/api/evenements/:id', function($id) use ($pdo) {
 
     $stmt = $pdo->prepare(
         'SELECT id, titre, image, description_courte, description_longue, date_heure,
-                lieu, adresse, ville_id, categorie_id, public_id, prix, lien_externe
+                lieu, adresse, ville_id, categorie_id, public_id, prix, accessibilite, lien_externe
          FROM evenements WHERE id = ?'
     );
     $stmt->execute([$id]);
@@ -110,24 +110,34 @@ $router->get('/api/evenements', function() use ($pdo) {
     $ville     = $_GET['ville']     ?? null;
     $public    = $_GET['public']    ?? null;
     $tri       = $_GET['tri']       ?? 'date';
+    $recherche = trim($_GET['recherche'] ?? '');
     $page      = max(1, (int)($_GET['page'] ?? 1));
     $par_page  = 12;
 
     $conditions = [];
     $params     = [];
 
-    if ($categorie) { $conditions[] = 'categorie_id = ?'; $params[] = (int)$categorie; }
-    if ($ville)     { $conditions[] = 'ville_id = ?';     $params[] = (int)$ville; }
-    if ($public)    { $conditions[] = 'public_id = ?';    $params[] = (int)$public; }
+    if ($categorie) { $conditions[] = 'e.categorie_id = ?'; $params[] = (int)$categorie; }
+    if ($ville)     { $conditions[] = 'e.ville_id = ?';     $params[] = (int)$ville; }
+    if ($public)    { $conditions[] = 'e.public_id = ?';    $params[] = (int)$public; }
+    if ($recherche) {
+        $conditions[] = '(e.titre LIKE ? OR e.lieu LIKE ? OR v.nom LIKE ?)';
+        $params[] = '%' . $recherche . '%';
+        $params[] = '%' . $recherche . '%';
+        $params[] = '%' . $recherche . '%';
+    }
 
     $where  = $conditions ? 'WHERE ' . implode(' AND ', $conditions) : '';
-    $ordre  = $tri === 'prix' ? 'prix' : 'date_heure';
+    $ordre  = $tri === 'prix' ? 'e.prix' : 'e.date_heure';
     $offset = ($page - 1) * $par_page;
 
     $stmt = $pdo->prepare(
-        "SELECT id, titre, image, description_courte, description_longue,
-                date_heure, lieu, adresse, ville_id, categorie_id, public_id, prix, lien_externe
-         FROM evenements $where ORDER BY $ordre LIMIT $par_page OFFSET $offset"
+        "SELECT e.id, e.titre, e.image, e.description_courte, e.description_longue,
+                e.date_heure, e.lieu, e.adresse, e.ville_id, e.categorie_id, e.public_id,
+                e.prix, e.accessibilite, e.lien_externe
+         FROM evenements e
+         LEFT JOIN villes v ON e.ville_id = v.id
+         $where ORDER BY $ordre LIMIT $par_page OFFSET $offset"
     );
     $stmt->execute($params);
     $evs = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -140,7 +150,9 @@ $router->get('/api/evenements', function() use ($pdo) {
         $ev['prix']         = (float)$ev['prix'];
     }
 
-    $countStmt = $pdo->prepare("SELECT COUNT(*) FROM evenements $where");
+    $countStmt = $pdo->prepare(
+        "SELECT COUNT(*) FROM evenements e LEFT JOIN villes v ON e.ville_id = v.id $where"
+    );
     $countStmt->execute($params);
     $total = (int)$countStmt->fetchColumn();
 
@@ -168,8 +180,8 @@ $router->post('/api/evenements', function() use ($pdo) {
     $stmt = $pdo->prepare(
         'INSERT INTO evenements (titre, image, description_courte, description_longue,
                                  date_heure, lieu, adresse, ville_id, categorie_id,
-                                 public_id, prix, lien_externe)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+                                 public_id, prix, accessibilite, lien_externe)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
     );
     $stmt->execute([
         $donnees['titre'],
@@ -183,6 +195,7 @@ $router->post('/api/evenements', function() use ($pdo) {
         $donnees['categorie_id']       ?? null,
         $donnees['public_id']          ?? null,
         $donnees['prix']               ?? 0,
+        $donnees['accessibilite']      ?? null,
         $donnees['lien_externe']       ?? null,
     ]);
 
@@ -221,7 +234,7 @@ $router->put('/api/evenements/:id', function($id) use ($pdo) {
         'UPDATE evenements
          SET titre=?, image=?, description_courte=?, description_longue=?,
              date_heure=?, lieu=?, adresse=?, ville_id=?, categorie_id=?,
-             public_id=?, prix=?, lien_externe=?
+             public_id=?, prix=?, accessibilite=?, lien_externe=?
          WHERE id=?'
     );
     $stmt->execute([
@@ -236,6 +249,7 @@ $router->put('/api/evenements/:id', function($id) use ($pdo) {
         $donnees['categorie_id']       ?? null,
         $donnees['public_id']          ?? null,
         $donnees['prix']               ?? 0,
+        $donnees['accessibilite']      ?? null,
         $donnees['lien_externe']       ?? null,
         $id,
     ]);

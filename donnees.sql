@@ -36,8 +36,8 @@ INSERT INTO mots_cles (mot) VALUES
     ('sport');  
 
 
-INSERT INTO evenements (titre, image, description_courte, description_longue, date_heure, lieu, adresse, ville_id, categorie_id, public_id, prix) VALUES
-    
+INSERT INTO evenements (titre, image, description_courte, description_longue, date_heure, lieu, adresse, ville_id, categorie_id, public_id, prix, accessibilite) VALUES
+
         ('Soirée Jazz au quai',
         'images_evenement/jazz-photo.jpg',
         'Concert de jazz contemporain au bord du fleuve.',
@@ -45,8 +45,7 @@ INSERT INTO evenements (titre, image, description_courte, description_longue, da
         '2026-06-12 à 20:00',
         'Maison de la Culture du Vieux-Port',
         'Montréal, Québec, Canada',
-        1, 1, 1, 25.00), 
-
+        1, 1, 1, 25.00, 'Accessible'),
 
         ('Rolling Loud',
         'images_index/RollingL.png',
@@ -55,8 +54,7 @@ INSERT INTO evenements (titre, image, description_courte, description_longue, da
         '2026-07-30 à 18:00',
         'Sony Hall',
         'New York, États-Unis',
-        3, 1, 3, 150.00),
-
+        3, 1, 3, 150.00, 'Accessible'),
 
         ('Ferme en ville',
         'images_index/farm.jpg',
@@ -65,8 +63,7 @@ INSERT INTO evenements (titre, image, description_courte, description_longue, da
         '2026-06-02 à 10:00',
         'Jardins communautaires de Montréal',
         'Montréal, Québec, Canada',
-        1, 2, 2, 0.00),
-
+        1, 2, 2, 0.00, 'Accessible'),
 
         ('Exposition Banksy',
         'images_index/Banksy.jpg',
@@ -75,7 +72,7 @@ INSERT INTO evenements (titre, image, description_courte, description_longue, da
         '2026-06-15 à 10:00',
         'Musée d''art contemporain de Montréal',
         'Montréal, Québec, Canada',
-        1, 3, 1, 18.00),
+        1, 3, 1, 18.00, 'Accessible'),
 
         ('Match des Canadiens',
         'images_index/canadiens.png',
@@ -84,8 +81,7 @@ INSERT INTO evenements (titre, image, description_courte, description_longue, da
         '2026-05-20 à 19:30',
         'Centre Bell',
         'Montréal, Québec, Canada',
-        1, 4, 1, 65.00),
-
+        1, 4, 1, 65.00, 'Accessible'),
 
         ('Festival de Jazz de Montréal',
         'images_index/jazz.jpg',
@@ -94,7 +90,7 @@ INSERT INTO evenements (titre, image, description_courte, description_longue, da
         '2026-06-27 à 18:00',
         'Quartier des spectacles',
         'Montréal, Québec, Canada',
-        1, 1, 1, 0.00),
+        1, 1, 1, 0.00, 'Accessible'),
 
         ('Randonnée au Mont-Royal',
         'images_index/mont-royal.jpg',
@@ -103,8 +99,7 @@ INSERT INTO evenements (titre, image, description_courte, description_longue, da
         '2026-05-10 à 09:00',
         'Parc du Mont-Royal',
         'Montréal, Québec, Canada',
-        1, 2, 1, 0.00),
-
+        1, 2, 1, 0.00, 'Accessible'),
 
         ('Tournoi de Basketball 3x3',
         'images_index/basketball.jpg',
@@ -113,7 +108,7 @@ INSERT INTO evenements (titre, image, description_courte, description_longue, da
         '2026-08-05 à 10:00',
         'Harbourfront Centre',
         'Toronto, Ontario, Canada',
-        2, 4, 1, 12.00);
+        2, 4, 1, 12.00, 'Non accessible');
 
 
 -- Compte admin : exécuter creer_admin.php dans le navigateur 

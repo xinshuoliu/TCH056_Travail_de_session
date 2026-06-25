@@ -26,6 +26,7 @@ function afficher_evenement(evenement) {
     document.getElementById('ev-prix').textContent               = affichagePrix;
     document.getElementById('ev-public').textContent             = nomPublicVise;
     document.getElementById('ev-categorie').textContent          = nomCategorie;
+    document.getElementById('ev-accessibilite').textContent      = evenement.accessibilite || 'Non précisé';
     document.getElementById('ev-description-longue').textContent = evenement.description_longue;
 
     // mots-clés

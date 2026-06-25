@@ -55,6 +55,7 @@ $publics_js    = array_map(function($p) { return ['id' => (int)$p['id'], 'nom' =
                 <p><strong>Prix :</strong> <span id="ev-prix"></span></p>
                 <p><strong>Public :</strong> <span id="ev-public"></span></p>
                 <p><strong>Catégorie :</strong> <span id="ev-categorie"></span></p>
+                <p><strong>Accessibilité :</strong> <span id="ev-accessibilite"></span></p>
 
                 <h2>Description</h2>
                 <p id="ev-description-longue"></p>

@@ -163,14 +163,12 @@ function filtrer_evenements() {
 
     // construction des paramètres URL
     const params = new URLSearchParams();
-    if(categorieId) params.set('categorie', categorieId);
-    if(villeId) params.set('ville', villeId);
-    if(publicId) params.set('public', publicId);
-    if(tri) params.set('tri', tri);
+    if (categorieId) params.set('categorie', categorieId);
+    if (villeId)     params.set('ville', villeId);
+    if (publicId)    params.set('public', publicId);
+    if (tri)         params.set('tri', tri);
+    if (recherche)   params.set('recherche', recherche);
     params.set('page', pageCourante);
-
-    // chargement des événements depuis l'API (catégorie/ville/public/tri côté serveur, 
-    // recherche textuelle côté client)
 
     fetch('/api/evenements?' + params.toString())
         .then(function(response) {
@@ -183,20 +181,8 @@ function filtrer_evenements() {
             if (data.erreur)
                 throw new Error('Erreur reçue du serveur : ' + data.erreur);
 
-            let resultats = data.evenements;
-
-            if (recherche) {
-                resultats = resultats.filter(function(ev) {
-                    const villeEv  = villes.find(function(v) { return v.id === ev.ville_id; });
-                    const nomVille = villeEv ? villeEv.nom.toLowerCase() : '';
-                    return ev.titre.toLowerCase().includes(recherche)
-                        || ev.lieu.toLowerCase().includes(recherche)
-                        || nomVille.includes(recherche);
-                });
-            }
-
             evenements = data.evenements;
-            afficher_evenements(resultats);
+            afficher_evenements(data.evenements);
             afficher_pagination(data);
         })
         .catch(function(erreur) {
