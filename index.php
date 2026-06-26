@@ -90,7 +90,7 @@ $estAdmin    = $estConnecte && $_SESSION['utilisateur']['type'] === 'admin';
     </main>
 
     <footer>
-        <p>Xin &amp; Olivier</p>
+        <p>Xin &amp; Olivier Groupe 9</p>
     </footer>
 </div>
 
@@ -164,6 +164,14 @@ $estAdmin    = $estConnecte && $_SESSION['utilisateur']['type'] === 'admin';
                 <label for="champ-prix">Prix ($) *</label>
                 <input type="number" id="champ-prix" min="0" step="0.01" placeholder="0.00">
                 <span id="erreur-prix" class="erreur-champ"></span>
+            </div>
+            <div class="form-groupe">
+                <label for="champ-accessibilite">Accessibilité</label>
+                <input type="text" id="champ-accessibilite" placeholder="ex: Accessible, Non accessible">
+            </div>
+            <div class="form-groupe">
+                <label for="champ-lien-externe">Lien externe (optionnel)</label>
+                <input type="url" id="champ-lien-externe" placeholder="https://...">
             </div>
 
             <button type="submit" class="btn-soumettre">Enregistrer</button>

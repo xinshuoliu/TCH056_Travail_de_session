@@ -35,14 +35,14 @@ function afficher_evenement(evenement) {
     evenement.mots_cles_ids.forEach(function(mcId) {
         const mc = mots_cles.find(function(m) { return m.id === mcId; });
         if (mc) {
-            // ajout d'un item par mot-clé
+            // ajout item par mot-clé
             const li = document.createElement('li');
             li.textContent = mc.mot;
             listeMots.appendChild(li);
         }
     });
 
-    // lien externe optionnel
+    // lien externe 
     if (evenement.lien_externe) {
         const lien = document.getElementById('ev-lien-externe');
         lien.href = evenement.lien_externe;
@@ -50,7 +50,7 @@ function afficher_evenement(evenement) {
     }
 }
 
-// reçoit le tableau de similaires directement depuis l'API (GET /api/evenements/:id/similaires)
+// reçoit le tableau de similaires directement depuis api
 function afficher_similaires(similaires) {
     const grille = document.getElementById('grille-similaires');
     grille.innerHTML = '';
@@ -69,7 +69,7 @@ function afficher_similaires(similaires) {
         const ville = villes.find(function(v) { return v.id === ev.ville_id; });
         const nomVille = ville ? ville.nom : '';
 
-        // contenu HTML de la carte
+        // contenu html de la carte
         article.innerHTML =
             '<img src="' + ev.image + '" alt="' + ev.titre + '">' +
             '<h2>' + ev.titre + '</h2>' +
@@ -77,7 +77,7 @@ function afficher_similaires(similaires) {
             '<address>' + nomVille + '</address>' +
             '<p>' + ev.description_courte + '</p>';
 
-        // clic vers la page de l'événement
+        // clic vers la page de lévénement
         article.addEventListener('click', function() {
             window.location.href = 'evenement.php?id=' + ev.id;
         });

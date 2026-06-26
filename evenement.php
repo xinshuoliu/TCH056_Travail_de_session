@@ -66,14 +66,17 @@ $publics_js    = array_map(function($p) { return ['id' => (int)$p['id'], 'nom' =
             </div>
         </div>
         <section>
+            <h2>Mots-clés</h2>
+            <ul id="ev-mots-cles" class="mots-cles"></ul>
+        </section>
+        <section>
             <h2>Événements similaires</h2>
             <div class="grille-similaires" id="grille-similaires"></div>
         </section>
     </main>
 
     <footer>
-        <p>Mots-clés</p>
-        <ul id="ev-mots-cles" class="mots-cles"></ul>
+        <p>Xin &amp; Olivier Groupe 9</p>
     </footer>
 </div>
 

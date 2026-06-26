@@ -86,7 +86,7 @@ $estConnecte = isset($_SESSION['utilisateur']);
 </main>
 
 <footer>
-    <p>Xin &amp; Olivier</p>
+    <p>Xin &amp; Olivier Groupe 9</p>
 </footer>
 </body>
 </html>

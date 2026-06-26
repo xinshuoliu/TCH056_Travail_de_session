@@ -1,21 +1,17 @@
-// Tableau global rempli par un fetch depuis /api/evenements à chaque 
-// appel de filtrer_evenements()
 
 let evenements = []; 
 
-// page active dans la liste paginée; remise à 1 à chaque changement de filtre
 let pageCourante = 1;
 
 // filtres
 
 function afficher_filtres() {
-    // Les filtres de la page sont générés par PHP depuis la BD.
-    // Cette fonction remplit uniquement les selects du formulaire modal (admin).
+
     const formCat    = document.getElementById('champ-categorie');
     const formVille  = document.getElementById('champ-ville');
     const formPublic = document.getElementById('champ-public');
 
-    if (!formCat) return; // modal absent (utilisateur non-admin)
+    if (!formCat) return; // modal absent 
 
     categories.forEach(function(c) {
         const opt = document.createElement('option');
@@ -77,7 +73,7 @@ function afficher_evenement_resume(evenement) {
               '</div>'
             : '');
 
-    // clic vers la page détail 
+    // clic vers page détail 
     article.addEventListener('click', function(e) {
         if (!e.target.closest('.evenement-actions')) {
             window.location.href = 'evenement.php?id=' + evenement.id;
@@ -123,7 +119,7 @@ function afficher_evenements(liste) {
 
 // pagination 
 
-// affiche les boutons Précédent / Suivant selon la page et le total retournés par l'API
+// affiche les boutons Précédent/Suivant selon la page et le total retournés
 function afficher_pagination(data) {
     const pagination = document.querySelector('.pagination');
     pagination.innerHTML = '';
@@ -161,7 +157,7 @@ function filtrer_evenements() {
     const tri         = document.getElementById('choix-tri').value;
     const recherche   = document.getElementById('recherche').value.toLowerCase();
 
-    // construction des paramètres URL
+    // construction des paramètres url
     const params = new URLSearchParams();
     if (categorieId) params.set('categorie', categorieId);
     if (villeId)     params.set('ville', villeId);
@@ -247,6 +243,8 @@ function ouvrir_formulaire(evenementAModifier) {
         document.getElementById('champ-categorie').value          = evenementAModifier.categorie_id;
         document.getElementById('champ-public').value             = evenementAModifier.public_id;
         document.getElementById('champ-prix').value               = evenementAModifier.prix;
+        document.getElementById('champ-accessibilite').value      = evenementAModifier.accessibilite || '';
+        document.getElementById('champ-lien-externe').value       = evenementAModifier.lien_externe  || '';
     }
 
     // affichage modal
@@ -311,6 +309,8 @@ function soumettre_formulaire(e) {
         categorie_id:       parseInt(document.getElementById('champ-categorie').value) || null,
         public_id:          parseInt(document.getElementById('champ-public').value)    || null,
         prix:               parseFloat(document.getElementById('champ-prix').value),
+        accessibilite:      document.getElementById('champ-accessibilite').value.trim() || null,
+        lien_externe:       document.getElementById('champ-lien-externe').value.trim()  || null,
     };
 
     if (!valider_formulaire(donnees)) return;
